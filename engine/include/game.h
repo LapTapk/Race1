@@ -3,18 +3,24 @@
 
 #include "event_manager.h"
 #include "game_object.h"
+#include "game_conf.h"
 #include <SFML/Graphics.hpp>
+#include <string>
 
 class Game {
 public:
-    static Game& instance(std::pair<int, int> window_size);
-    GameObject scene;
-    EventManager event_manager;
+    static Game* instance;
+    GameObject* scene;
+    GameObject* camera;
     sf::RenderWindow window;
-    bool running;
+    EventManager event_manager;
+    GameConf conf;
+    bool running = false;
     void run();
+    Game(GameConf conf, GameObject* scene, GameObject* camera);
+    ~Game();
 private:
-    Game(std::pair<int, int> window_size);
+    void iteration();
 };
 
 #endif 

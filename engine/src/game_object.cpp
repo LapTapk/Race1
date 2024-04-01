@@ -1,14 +1,17 @@
+#include "transform.h"
 #include "game_object.h"
 #include "component.h"
 #include <algorithm>
 #include <vector>
-#include "transform.h"
+
+GameObject::GameObject() : GameObject(nullptr) {};
 
 GameObject::GameObject(GameObject* parent_c) {
     parent = parent_c;
-    parent->children.push_back(this);
-    transform = new Transform();
-    components.push_back(transform);
+    if (parent != nullptr) {
+        parent->children.push_back(this);
+    }
+    transform = new Transform(this);
 }
 
 void update_rec(GameObject* cur) {
@@ -26,7 +29,7 @@ void GameObject::update() {
 }
 
 void GameObject::remove_cmp(Component* cmp) {
-    if(dynamic_cast<Transform*>(cmp) != nullptr) {
+    if (dynamic_cast<Transform*>(cmp) != nullptr) {
         return;
     }
 
@@ -36,11 +39,11 @@ void GameObject::remove_cmp(Component* cmp) {
 }
 
 GameObject::~GameObject() {
-    for(GameObject* go : children) {
+    for (GameObject* go : children) {
         delete go;
     }
 
-    for(Component* cmp : components) {
+    for (Component* cmp : components) {
         delete cmp;
     }
 }

@@ -1,12 +1,12 @@
 #ifndef COMPONENT_H
 #define COMPONENT_H
 
-#include "game_object.h"
+class GameObject;
 
 class Component {
 public:
     GameObject* go;
-    virtual void update();
+    virtual void update() {};
     Component(GameObject* go);
 };
 #endif

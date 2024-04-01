@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 class EventManager {
+public:
     std::vector<sf::Event> events;
     void update();
 };

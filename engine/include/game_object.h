@@ -2,8 +2,8 @@
 #define GAME_OBJECT_H
 
 #include <vector>
-#include "component.h"
 #include "transform.h"
+#include "component.h"
 
 class GameObject {
 public:
@@ -13,6 +13,7 @@ public:
     Transform* transform;
     void update();
     void remove_cmp(Component* cmp);
+    GameObject();
     GameObject(GameObject* parent);
     ~GameObject();
 };
