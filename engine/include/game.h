@@ -10,6 +10,7 @@
 class Game {
 public:
     static Game* instance;
+    sf::Clock clock;
     GameObject* scene;
     GameObject* camera;
     sf::RenderWindow window;

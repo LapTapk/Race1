@@ -11,4 +11,5 @@ GameConf::GameConf(std::string path) {
     window_size = std::make_pair(conf["window_size"][0u].asInt()
         , conf["window_size"][1u].asInt());
     title = conf["title"].asString();
+    fps = conf["fps"].asInt();
 }

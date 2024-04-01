@@ -1,13 +1,17 @@
 #include "game.h"
 #include <fstream>
 #include <stdexcept>
+#include <iostream>
+#include <thread>
+#include <chrono>
 
 Game::Game(GameConf conf_c, GameObject* scene_c, GameObject* camera_c) :
     conf(conf_c),
     window(sf::VideoMode(conf_c.window_size.first, conf_c.window_size.second), conf_c.title),
     event_manager(),
     scene(scene_c),
-    camera(camera_c) {
+    camera(camera_c),
+    clock() {
     if(instance != nullptr) {
         throw std::runtime_error("There must be only one instance of class Game!");
     }
@@ -28,6 +32,10 @@ void Game::iteration() {
     scene->update();
 
     window.display();
+    int sec = 1000.0f / conf.fps - clock.getElapsedTime().asMilliseconds();
+    std::this_thread::sleep_for(std::chrono::milliseconds(sec));
+    std::cout << "darn" << std::endl;
+    clock.restart();
 }
 
 void Game::run() {

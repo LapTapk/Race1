@@ -9,6 +9,7 @@ public:
     int default_camera_offset;
     std::pair<int, int> window_size;
     std::string title;
+    int fps;
 };
 
 #endif
