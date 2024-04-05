@@ -1,7 +1,6 @@
 #include "game.h"
 #include <fstream>
 #include <stdexcept>
-#include <iostream>
 #include <thread>
 #include <chrono>
 
@@ -32,9 +31,8 @@ void Game::iteration() {
     scene->update();
 
     window.display();
-    int sec = 1000.0f / conf.fps - clock.getElapsedTime().asMilliseconds();
+    int sec = 1000 / conf.fps - clock.getElapsedTime().asMilliseconds();
     std::this_thread::sleep_for(std::chrono::milliseconds(sec));
-    std::cout << "darn" << std::endl;
     clock.restart();
 }
 

@@ -1,15 +1,10 @@
-#include <iostream>
-
-struct A {
-    static int* bruh(int b) {
-        static int* a = new int(b);
-        return a;
-    }
-};
+#include "game.h"
+#include "default_scene.h"
 
 int main() {
-    int* a = A::bruh(5);
-    std::cout << a << ' ' << (*a) << '\n';
-    int* b = A::bruh(6);
-    std::cout << b << ' ' << (*b);
+    GameObject* scene, * camera;
+    create_defualt_scene(scene, camera);
+    GameConf conf("../conf.json");
+    Game game(conf, scene, camera);
+    game.run();
 }

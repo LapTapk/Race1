@@ -1,6 +1,5 @@
-#include "transform.h"
 #include "game_object.h"
-#include "component.h"
+#include "transform.h"
 #include <algorithm>
 #include <vector>
 
@@ -19,7 +18,7 @@ void update_rec(GameObject* cur) {
         update_rec(go);
     }
 
-    for (Component* cmp : cur->components) {
+    for (std::unique_ptr<Component>& cmp : cur->components) {
         cmp->update();
     }
 }
@@ -28,14 +27,13 @@ void GameObject::update() {
     update_rec(this);
 }
 
-void GameObject::remove_cmp(Component* cmp) {
-    if (dynamic_cast<Transform*>(cmp) != nullptr) {
+void GameObject::remove_cmp(std::unique_ptr<Component> cmp) {
+    if (dynamic_cast<Transform*>(cmp.get()) != nullptr) {
         return;
     }
 
     auto i{ std::find(components.begin(), components.end(), cmp) };
     components.erase(i);
-    delete cmp;
 }
 
 GameObject::~GameObject() {
@@ -43,7 +41,12 @@ GameObject::~GameObject() {
         delete go;
     }
 
-    for (Component* cmp : components) {
-        delete cmp;
+    for (std::unique_ptr<Component>& cmp : components) {
+        cmp.release();
     }
+}
+
+Component::Component(std::shared_ptr<GameObject> go_c) {
+    go = go_c;
+    go->components.push_back(std::unique_ptr<Component>(this));
 }

@@ -1,7 +1,7 @@
 #ifndef TEST_CMP_H
 #define TEST_CMP_H
 
-#include "component.h"
+#include "game_object.h"
 
 class TestCmp : public Component {
 public:
