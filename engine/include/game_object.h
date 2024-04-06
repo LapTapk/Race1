@@ -10,11 +10,11 @@ class Component;
 class GameObject {
 public:
     GameObject* parent;
-    std::vector<std::unique_ptr<Component>> components;
-    std::vector<std::shared_ptr<GameObject>> children;
+    std::vector<Component*> components;
+    std::vector<GameObject*> children;
     Transform* transform;
     void update();
-    void remove_cmp(std::unique_ptr<Component> cmp);
+    void remove_cmp(Component* cmp);
     GameObject();
     GameObject(GameObject* parent);
     ~GameObject();
@@ -22,8 +22,8 @@ public:
 
 class Component {
 public:
-    std::shared_ptr<GameObject> go;
+    GameObject* go;
     virtual void update() {};
-    Component(std::shared_ptr<GameObject> go);
+    Component(GameObject* go);
 };
 #endif

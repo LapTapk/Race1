@@ -18,7 +18,7 @@ void update_rec(GameObject* cur) {
         update_rec(go);
     }
 
-    for (std::unique_ptr<Component>& cmp : cur->components) {
+    for (Component* cmp : cur->components) {
         cmp->update();
     }
 }
@@ -27,8 +27,8 @@ void GameObject::update() {
     update_rec(this);
 }
 
-void GameObject::remove_cmp(std::unique_ptr<Component> cmp) {
-    if (dynamic_cast<Transform*>(cmp.get()) != nullptr) {
+void GameObject::remove_cmp(Component* cmp) {
+    if (dynamic_cast<Transform*>(cmp) != nullptr) {
         return;
     }
 
@@ -41,12 +41,11 @@ GameObject::~GameObject() {
         delete go;
     }
 
-    for (std::unique_ptr<Component>& cmp : components) {
-        cmp.release();
+    for (Component* cmp : components) {
+        delete cmp;
     }
 }
 
-Component::Component(std::shared_ptr<GameObject> go_c) {
-    go = go_c;
-    go->components.push_back(std::unique_ptr<Component>(this));
+Component::Component(GameObject* go_c) : go(go_c) {
+    go->components.push_back(this);
 }
