@@ -6,12 +6,13 @@
 #include "game_conf.h"
 #include <SFML/Graphics.hpp>
 #include <string>
+#include <memory>
 
 class Game {
 public:
     static Game* instance;
     sf::Clock clock;
-    GameObject* scene;
+    std::unique_ptr<GameObject> scene;
     GameObject* camera;
     sf::RenderWindow window;
     EventManager event_manager;

@@ -5,8 +5,8 @@
 Transform::Transform(GameObject* go) : Component(go) {}
 
 sf::Vector3f Transform::global_pos() {
-    GameObject* parent {go->parent};
-    if(parent == nullptr) {
+    GameObject* parent{ go->parent };
+    if (parent == nullptr) {
         return position;
     }
 
@@ -15,8 +15,8 @@ sf::Vector3f Transform::global_pos() {
 }
 
 sf::Vector2f Transform::global_scale() {
-    GameObject* parent {go->parent};
-    if(parent == nullptr) {
+    GameObject* parent{ go->parent };
+    if (parent == nullptr) {
         return scale;
     }
 
@@ -25,12 +25,11 @@ sf::Vector2f Transform::global_scale() {
 }
 
 float Transform::global_rot() {
-    GameObject* parent {go->parent};
-    if(parent == nullptr) {
+    GameObject* parent{ go->parent };
+    if (parent == nullptr) {
         return rotation;
     }
 
     float parent_grot = parent->transform->global_rot();
     return rotation + parent_grot;
-
 }

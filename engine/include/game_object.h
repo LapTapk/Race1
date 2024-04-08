@@ -10,8 +10,8 @@ class Component;
 class GameObject {
 public:
     GameObject* parent;
-    std::vector<Component*> components;
-    std::vector<GameObject*> children;
+    std::vector<std::unique_ptr<Component>> components;
+    std::vector<std::unique_ptr<GameObject>> children;
     Transform* transform;
     void update();
     void remove_cmp(Component* cmp);

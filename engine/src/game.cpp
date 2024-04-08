@@ -3,12 +3,13 @@
 #include <stdexcept>
 #include <thread>
 #include <chrono>
+#include <memory>
 
 Game::Game(GameConf conf_c, GameObject* scene_c, GameObject* camera_c) :
     conf(conf_c),
     window(sf::VideoMode(conf_c.window_size.first, conf_c.window_size.second), conf_c.title),
     event_manager(),
-    scene(scene_c),
+    scene(std::unique_ptr<GameObject>(scene_c)),
     camera(camera_c),
     clock() {
     if(instance != nullptr) {
@@ -46,7 +47,7 @@ void Game::run() {
 
 
 Game::~Game() {
-    delete scene;
+    scene.reset();
 }
 
 Game* Game::instance{nullptr};
