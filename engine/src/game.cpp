@@ -32,9 +32,9 @@ void Game::iteration() {
     scene->update();
 
     window.display();
-    int sec = std::max(0, 1000 / conf.fps - clock.getElapsedTime().asMilliseconds());
-    std::this_thread::sleep_for(std::chrono::milliseconds(sec));
-    delta_time = clock.getElapsedTime().asSeconds() + sec;
+    int msec = std::max(0, 1000 / conf.fps - clock.getElapsedTime().asMilliseconds());
+    std::this_thread::sleep_for(std::chrono::milliseconds(msec));
+    delta_time = clock.getElapsedTime().asSeconds() + msec / 1000.0f;
     clock.restart();
 }
 
