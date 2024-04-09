@@ -32,8 +32,9 @@ void Game::iteration() {
     scene->update();
 
     window.display();
-    int sec = 1000 / conf.fps - clock.getElapsedTime().asMilliseconds();
+    int sec = std::max(0, 1000 / conf.fps - clock.getElapsedTime().asMilliseconds());
     std::this_thread::sleep_for(std::chrono::milliseconds(sec));
+    delta_time = clock.getElapsedTime().asSeconds() + sec;
     clock.restart();
 }
 
@@ -48,6 +49,10 @@ void Game::run() {
 
 Game::~Game() {
     scene.reset();
+}
+
+float Game::get_delta_time() {
+    return delta_time;
 }
 
 Game* Game::instance{nullptr};

@@ -19,9 +19,11 @@ public:
     GameConf conf;
     bool running = false;
     void run();
+    float get_delta_time();
     Game(GameConf conf, GameObject* scene, GameObject* camera);
     ~Game();
 private:
+    float delta_time;
     void iteration();
 };
 
