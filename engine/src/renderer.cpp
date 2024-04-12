@@ -2,6 +2,7 @@
 #include "transform.h"
 #include "game.h"
 #include <cmath>
+#include <iostream>
 
 Renderer::Renderer(GameObject* go, std::string path_to_img) : Component(go) {
     texture.loadFromFile(path_to_img);
@@ -21,12 +22,19 @@ void Renderer::update() {
     sf::Vector3f pos3{ transform->global_pos() };
     sf::Vector2f pos2(pos3.x, pos3.y);
 
+
     sf::Vector3f camera_pos3{ game->camera->transform->global_pos() };
     sf::Vector2f camera_pos2(camera_pos3.x, camera_pos3.y);
 
+    sf::Vector2f radius{ pos2 - camera_pos2 };
+    double alpha = camera_rot / 180.0f * M_PI;
+    sf::Vector2f pos{ radius.x * cos(alpha) - radius.y * sin(alpha),
+        radius.y * cos(alpha) + radius.x * sin(alpha) };
+    std::cout << pos2.x << ' ' << pos.y << std::endl;
+
     sf::Vector2f window_offset(
         game->conf.window_size.first / 2, game->conf.window_size.second / 2);
-    sf::Vector2f pos{ pos2 - camera_pos2 + window_offset };
+    pos += window_offset;
     sprite.setPosition(pos);
 
 
