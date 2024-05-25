@@ -1,6 +1,6 @@
 {
-    "default_camera_offset": 10,
     "window_size": [600, 600],
     "title": "Race",
-    "fps": 60
+    "fps": 60,
+    "wheel_rot_delta": 100
 }

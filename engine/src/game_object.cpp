@@ -1,5 +1,5 @@
 #include "game_object.h"
-#include "transform.h"
+#include "components/transform.h"
 #include <stdexcept>
 #include <algorithm>
 #include <vector>

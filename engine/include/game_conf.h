@@ -6,10 +6,10 @@
 class GameConf {
 public:
     GameConf(std::string conf_path);
-    int default_camera_offset;
     std::pair<int, int> window_size;
     std::string title;
     int fps;
+    int wheel_rot_delta;
 };
 
 #endif

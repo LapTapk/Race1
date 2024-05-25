@@ -7,9 +7,9 @@ GameConf::GameConf(std::string path) {
     Json::Value conf;
     conf_cin >> conf;
 
-    default_camera_offset = conf["default_camera_offset"].asInt();
     window_size = std::make_pair(conf["window_size"][0u].asInt()
         , conf["window_size"][1u].asInt());
     title = conf["title"].asString();
     fps = conf["fps"].asInt();
+    wheel_rot_delta = conf["wheel_rot_delta"].asInt();
 }

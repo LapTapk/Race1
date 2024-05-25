@@ -1,0 +1,7 @@
+#include "components/transform.h"
+#include "components/mover.h"
+#include "components/renderer.h"
+#include "components/rotor.h"
+#include "components/force.h"
+#include "components/map_drawer.h"
+#include "components/camera.h"

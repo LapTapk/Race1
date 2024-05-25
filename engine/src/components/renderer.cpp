@@ -1,8 +1,7 @@
-#include "renderer.h"
-#include "transform.h"
+#include "components/renderer.h"
+#include "components/transform.h"
 #include "game.h"
 #include <cmath>
-#include <iostream>
 
 Renderer::Renderer(GameObject* go, std::string path_to_img) : Component(go) {
     texture.loadFromFile(path_to_img);
@@ -14,34 +13,33 @@ Renderer::Renderer(GameObject* go, std::string path_to_img) : Component(go) {
 void Renderer::update() {
     Game* game{ Game::instance };
     Transform* transform{ go->transform };
+    Camera* camera{ game->camera };
 
-    int camera_rot{ game->camera->transform->global_rot() };
+    int camera_rot{ camera->go->transform->global_rot() };
     int rot{ transform->global_rot() + camera_rot };
     sprite.setRotation(rot);
 
-    sf::Vector3f pos3{ transform->global_pos() };
-    sf::Vector2f pos2(pos3.x, pos3.y);
+    sf::Vector2f pos{ transform->global_pos() };
+    pos.y *= -1.0f;
 
+    sf::Vector2f camera_pos{ camera->go->transform->global_pos() };
 
-    sf::Vector3f camera_pos3{ game->camera->transform->global_pos() };
-    sf::Vector2f camera_pos2(camera_pos3.x, camera_pos3.y);
-
-    sf::Vector2f radius{ pos2 - camera_pos2 };
+    sf::Vector2f radius{ pos - camera_pos };
+    radius /= camera->zoomout;
     double alpha = camera_rot / 180.0f * M_PI;
-    sf::Vector2f pos{ radius.x * cos(alpha) - radius.y * sin(alpha),
+    sf::Vector2f rot_pos{ radius.x * cos(alpha) - radius.y * sin(alpha),
         radius.y * cos(alpha) + radius.x * sin(alpha) };
-    std::cout << pos2.x << ' ' << pos.y << std::endl;
 
     sf::Vector2f window_offset(
         game->conf.window_size.first / 2, game->conf.window_size.second / 2);
-    pos += window_offset;
-    sprite.setPosition(pos);
+
+    rot_pos += window_offset;
+    sprite.setPosition(rot_pos);
 
 
     sf::Vector2f scale{ transform->global_scale() };
-    float camera_height_coef{
-        1.0f * game->conf.default_camera_offset / game->camera->transform->position.z };
-    sprite.setScale(scale.x * camera_height_coef, scale.y * camera_height_coef);
+    scale /= camera->zoomout;
+    sprite.setScale(scale);
 
     game->window.draw(sprite);
 }

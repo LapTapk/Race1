@@ -1,16 +1,16 @@
-#include "transform.h"
 #include "game_object.h"
 #include "game.h"
+#include "components/transform.h"
 
 Transform::Transform(GameObject* go) : Component(go) {}
 
-sf::Vector3f Transform::global_pos() {
+sf::Vector2f Transform::global_pos() {
     GameObject* parent{ go->parent };
     if (parent == nullptr) {
         return position;
     }
 
-    sf::Vector3f parent_gpos = parent->transform->global_pos();
+    sf::Vector2f parent_gpos = parent->transform->global_pos();
     return position + parent_gpos;
 }
 
