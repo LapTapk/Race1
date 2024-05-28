@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <fstream>
 #include <iostream>
+#include <cmath>
 #include "game.h"
 
 MapCoords::MapCoords(std::string path_to_json_c) :
@@ -45,20 +46,25 @@ MapDrawer::MapDrawer(GameObject* go, std::string path_to_json, bool write_c) :
 
 void MapDrawer::draw() {
     Game* game{ Game::instance };
+    GameObject* camera{game->camera->go};
     int count = coords.points.size();
     sf::VertexArray lines{ sf::LinesStrip, count };
     for (int i = 0; i < count; i++) {
         float zoomout{ game->camera->zoomout };
         std::pair<int, int> wsize{ game->conf.window_size };
         sf::Vector2f window_offset{
-            wsize.first / 2 * zoomout, wsize.second / 2 * zoomout
+            wsize.first / 2, wsize.second / 2
         };
         sf::Vector2f pos{
-            coords.points[i] - game->camera->go->transform->position
-            + window_offset
+            coords.points[i] - camera->transform->global_pos()
         };
         pos /= zoomout;
-        lines[i].position = pos;
+        double alpha = camera->transform->global_rot() / 180.0f * M_PI;
+        sf::Vector2f rot_pos{ pos.x * cos(alpha) - pos.y * sin(alpha),
+        pos.y * cos(alpha) + pos.x * sin(alpha) };
+        rot_pos.y *= -1;
+        rot_pos += window_offset;
+        lines[i].position = rot_pos;
         lines[i].color = sf::Color::Yellow;
     }
     game->window.draw(lines);

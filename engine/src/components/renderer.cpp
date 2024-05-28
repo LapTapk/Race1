@@ -16,13 +16,14 @@ void Renderer::update() {
     Camera* camera{ game->camera };
 
     int camera_rot{ camera->go->transform->global_rot() };
-    int rot{ transform->global_rot() + camera_rot };
+    int rot{ transform->global_rot() - camera_rot };
     sprite.setRotation(rot);
 
     sf::Vector2f pos{ transform->global_pos() };
     pos.y *= -1.0f;
 
     sf::Vector2f camera_pos{ camera->go->transform->global_pos() };
+    camera_pos.y *= -1.0f;
 
     sf::Vector2f radius{ pos - camera_pos };
     radius /= camera->zoomout;

@@ -29,10 +29,11 @@ void GameObject::update() {
 
 void GameObject::remove_cmp(Component* cmp) {
     if (transform == cmp) {
-        throw std::runtime_error{"Cannot remove Transform component!"};
+        throw std::runtime_error{ "Cannot remove Transform component!" };
     }
 
-    auto is_eq = [cmp](std::unique_ptr<Component>& icmp) { return icmp.get() == cmp; };
+    auto is_eq = [cmp](std::unique_ptr<Component>& icmp)
+        { return icmp.get() == cmp; };
     auto const& i{ std::find_if(components.begin(), components.end(), is_eq) };
     components.erase(i);
 }

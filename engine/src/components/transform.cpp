@@ -1,6 +1,7 @@
 #include "game_object.h"
 #include "game.h"
 #include "components/transform.h"
+#include <cmath>
 
 Transform::Transform(GameObject* go) : Component(go) {}
 
@@ -10,8 +11,13 @@ sf::Vector2f Transform::global_pos() {
         return position;
     }
 
+    float angle{parent->transform->rotation / 180.0f * M_PI};
+    sf::Vector2f rot_pos{
+        position.x * cos(angle) - position.y * sin(angle),
+        position.y * cos(angle) + position.x * sin(angle)
+    };
     sf::Vector2f parent_gpos = parent->transform->global_pos();
-    return position + parent_gpos;
+    return rot_pos + parent_gpos;
 }
 
 sf::Vector2f Transform::global_scale() {

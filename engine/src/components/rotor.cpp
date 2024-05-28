@@ -5,7 +5,7 @@
 
 Rotor::Rotor(GameObject* go) : Component(go) {}
 
-void Rotor::update() {
+float Rotor::get_rotation() {
     sf::RenderWindow& window{ Game::instance->window };
     int mposx{ sf::Mouse::getPosition(window).x };
     int center{ window.getSize().x / 2 };
@@ -15,6 +15,9 @@ void Rotor::update() {
         diff = std::min(abs(diff), wrd) * abs(diff) / diff;
     }
     float coef{ 1.0f * diff / wrd };
+    return 90 * coef;
+}
 
-    go->transform->rotation = 90 * coef;
+void Rotor::update() {
+    go->transform->rotation = get_rotation();
 }

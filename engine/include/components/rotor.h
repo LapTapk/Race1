@@ -6,6 +6,7 @@
 class Rotor : public Component {
 public:
     Rotor(GameObject* go);
+    float get_rotation();
     void update() override;
 };
 
