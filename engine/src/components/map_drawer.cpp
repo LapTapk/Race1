@@ -15,6 +15,7 @@ MapCoords::MapCoords(std::string path_to_json_c) :
     for (Json::Value& v : json["points"]) {
         points.push_back({ v[0].asFloat(), v[1].asFloat() });
     }
+    points.push_back(points[0]);
 }
 
 Json::Value MapCoords::to_json() {
@@ -36,36 +37,45 @@ void MapCoords::save() {
     fout << to_json();
 }
 
+void MapCoords::push_back(sf::Vector2f v) {
+    points.pop_back();
+    points.push_back(v);
+    points.push_back(points[0]);
+}
+
 MapCoords::~MapCoords() {
     save();
 }
 
 MapDrawer::MapDrawer(GameObject* go, std::string path_to_json, bool write_c) :
-    Component{go}, coords{path_to_json}, write{write_c} {
+    Component{ go }, coords{ path_to_json }, write{ write_c } {
+}
+
+void MapDrawer::draw_line(int i, sf::VertexArray& lines, sf::Vector2f a, sf::Vector2f b) {
+    const Game* game{ Game::instance };
+    const GameObject* camera{ game->camera->go };
+    float zoomout{ game->camera->zoomout };
+    std::pair<int, int> wsize{ game->conf.window_size };
+    sf::Vector2f window_offset{
+        wsize.first / 2, wsize.second / 2
+    };
+    sf::Vector2f pos{a - b};
+    pos /= zoomout;
+    double alpha = camera->transform->global_rot() / 180.0f * M_PI;
+    sf::Vector2f rot_pos{ pos.x * cos(alpha) - pos.y * sin(alpha),
+    pos.y * cos(alpha) + pos.x * sin(alpha) };
+    rot_pos.y *= -1;
+    rot_pos += window_offset;
+    lines[i].position = rot_pos;
+    lines[i].color = sf::Color::Yellow;
 }
 
 void MapDrawer::draw() {
     Game* game{ Game::instance };
-    GameObject* camera{game->camera->go};
     int count = coords.points.size();
     sf::VertexArray lines{ sf::LinesStrip, count };
     for (int i = 0; i < count; i++) {
-        float zoomout{ game->camera->zoomout };
-        std::pair<int, int> wsize{ game->conf.window_size };
-        sf::Vector2f window_offset{
-            wsize.first / 2, wsize.second / 2
-        };
-        sf::Vector2f pos{
-            coords.points[i] - camera->transform->global_pos()
-        };
-        pos /= zoomout;
-        double alpha = camera->transform->global_rot() / 180.0f * M_PI;
-        sf::Vector2f rot_pos{ pos.x * cos(alpha) - pos.y * sin(alpha),
-        pos.y * cos(alpha) + pos.x * sin(alpha) };
-        rot_pos.y *= -1;
-        rot_pos += window_offset;
-        lines[i].position = rot_pos;
-        lines[i].color = sf::Color::Yellow;
+        draw_line(i, lines, coords.points[i], game->camera->go->transform->global_pos());
     }
     game->window.draw(lines);
 }
@@ -98,7 +108,7 @@ sf::Vector2f get_pos() {
 
 void MapDrawer::update() {
     if (write && called_left_click()) {
-        coords.points.push_back(get_pos());
+        coords.push_back(get_pos());
         coords.save();
     }
 

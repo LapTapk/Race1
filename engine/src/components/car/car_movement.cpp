@@ -3,8 +3,10 @@
 #include <cmath>
 #include <iostream>
 
-CarMovement::CarMovement(GameObject* go, Force* force_c, CarConf conf_c) :
-    Component{ go }, force{ force_c }, conf{ conf_c } {
+CarMovement::CarMovement(GameObject* go, Force* force_c, CarConf conf_c,
+    RoadCheck* checker_c) :
+    Component{ go }, force{ force_c }, conf{ conf_c },
+    checker{ checker_c } {
     force->accelerations.push_back(sf::Vector2f{ 0, 0 });
     force->accelerations.push_back(sf::Vector2f{ 0, 0 });
     vacceleration = &force->accelerations[0];
@@ -33,6 +35,8 @@ sf::Vector2f CarMovement::get_dir() {
 }
 
 void CarMovement::update() {
+    decelerate = !checker->is_on_road(this);
+
     sf::Vector2f& vector{ force->mover->vector };
     if (len(vector) > 1) {
         go->transform->rotation += conf.rotation_delta * direction.x;

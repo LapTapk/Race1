@@ -20,22 +20,27 @@ GameObject* create_map_drawer(GameObject* scene, std::string path, bool write) {
 
 void create_defualt_scene(GameObject*& scene, Camera*& camera) {
     scene = new GameObject{ nullptr };
+    GameObject* map_drawer_go{ new GameObject{scene} };
+    MapDrawer* map_drawer1{ new MapDrawer{ map_drawer_go, "../configs/map1.json", false } };
+    MapDrawer* map_drawer2{ new MapDrawer{ map_drawer_go, "../configs/map2.json", false } };
     GameObject* car{ new GameObject{scene} };
     Movement* mover{ new Movement{car} };
-    CarConf car_conf{ 500, 30, 1, 3, 0.1 };
+    CarConf car_conf{ 500, 30, 1, 1, 0.1 };
     Force* force{ new Force{car, mover} };
-    CarMovement* car_mover{ new CarMovement{car,force, car_conf} };
-    car_mover->decelerate = false;
-    create_map_drawer(scene, "../configs/map1.json", false);
-    create_map_drawer(scene, "../configs/map2.json", true);
-    GameObject* camera_go{ new GameObject{car} };
-    camera = new Camera{ camera_go, 3 };
-    GameObject* go{ new GameObject{car} };
-    new Renderer{ go, "../assets/wheel.png" };
+    GameObject* check_origin{ new GameObject{scene} };
+    RoadCheck* check{ new RoadCheck{ check_origin, map_drawer1->coords, map_drawer2->coords} };
+    CarMovement* car_mover{ new CarMovement{car,force, car_conf, check} };
     new Renderer{ car, "../assets/penguin.png" };
-    Rotor* rotor{ new Rotor{ go } };
-    go->transform->position = sf::Vector2f{700, -700};
+    car_mover->decelerate = false;
+    GameObject* camera_go{ new GameObject{car} };
+    camera = new Camera{ camera_go, 10 };
+    GameObject* wheel{ new GameObject{car} };
+    new Renderer{ wheel, "../assets/wheel.png" };
+    Rotor* rotor{ new Rotor{ wheel } };
+    wheel->transform->position = sf::Vector2f{ 700, -700 };
     new WheelCarInput{ car, rotor, car_mover };
+
+    
 
 }
 

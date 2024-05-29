@@ -13,6 +13,7 @@ public:
     std::vector<sf::Vector2f> points;
     Json::Value to_json();
     void save();
+    void push_back(sf::Vector2f v);
     ~MapCoords();
 private:
     std::string path_to_json;
@@ -24,9 +25,10 @@ public:
         std::string path_to_json, bool write);
     void update() override;
     bool write;
-private:
     MapCoords coords;
     void draw();
+    void draw_line(int i, sf::VertexArray& lines, sf::Vector2f a, sf::Vector2f b);
+private:
 };
 
 #endif
