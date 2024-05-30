@@ -27,7 +27,6 @@ public:
     bool write;
     MapCoords coords;
     void draw();
-    void draw_line(int i, sf::VertexArray& lines, sf::Vector2f a, sf::Vector2f b);
 private:
 };
 

@@ -4,21 +4,7 @@
 #include "components/transform.h"
 #include "components/car/car_movement.h"
 #include <cmath>
-
-struct line {
-    sf::Vector2f a, b;
-    line(sf::Vector2f a_c, sf::Vector2f b_c) :
-        a{ a_c }, b{ b_c } {
-    }
-    bool ccw(sf::Vector2f a, sf::Vector2f b, sf::Vector2f c) {
-        return (c.y - a.y) * (b.x - a.x) > (b.y - a.y) * (c.x - a.x);
-    }
-
-    bool are_intersecting(line& other) {
-        return ccw(a, other.a, other.b) != ccw(b, other.a, other.b) &&
-            ccw(a, b, other.a) != ccw(a, b, other.b);
-    }
-};
+#include "utils.h"
 
 RoadCheck::RoadCheck(GameObject* go,
     MapCoords& outborders_c, MapCoords& inborders_c) :
