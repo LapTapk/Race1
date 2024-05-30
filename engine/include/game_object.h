@@ -24,7 +24,7 @@ public:
 class Component {
 public:
     GameObject* go;
-    virtual void update() = 0;
+    virtual void update() {};
     Component(GameObject* go);
 };
 #endif
