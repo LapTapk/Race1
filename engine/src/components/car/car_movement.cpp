@@ -42,8 +42,7 @@ void CarMovement::update() {
         go->transform->rotation += conf.rotation_delta * direction.x;
     }
 
-    float angle{ go->transform->global_rot() / 180.0f * M_PI };
-    sf::Vector2f forward{ sin(angle), cos(angle) };
+    sf::Vector2f forward{ go->transform->forward() };
     vector = forward * len(vector);
 
     if (move) {

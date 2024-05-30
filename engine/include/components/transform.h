@@ -14,6 +14,7 @@ public:
     float rotation = 0;
     float global_rot();
     Transform(GameObject* go);
+    sf::Vector2f forward();
 };
 
 #endif

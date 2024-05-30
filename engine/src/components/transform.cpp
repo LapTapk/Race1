@@ -5,6 +5,11 @@
 
 Transform::Transform(GameObject* go) : Component(go) {}
 
+sf::Vector2f Transform::forward() {
+    float angle{ go->transform->global_rot() / 180.0f * M_PI };
+    return sf::Vector2f{ sin(angle), cos(angle) };
+}
+
 sf::Vector2f Transform::global_pos() {
     GameObject* parent{ go->parent };
     if (parent == nullptr) {
