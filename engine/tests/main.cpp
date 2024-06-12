@@ -1,2 +1,13 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include "doctest.h"
+#include <doctest.h>
+#include "game.h"
+
+struct GameMock : Game {
+    GameMock() : Game{
+        GameConf{"../configs/test_conf.json"},
+        new GameObject(nullptr),
+        new Camera(scene.get(), 10),
+        "",
+        ""
+    } { }
+};

@@ -7,14 +7,15 @@
 #include "utils.h"
 
 RoadCheck::RoadCheck(GameObject* go,
-    MapCoords& outborders_c, MapCoords& inborders_c) :
+    std::vector<sf::Vector2f>& outborders_c,
+    std::vector<sf::Vector2f>& inborders_c) :
     Component{ go }, outborders{ outborders_c },
     inborders{ inborders_c } {}
 
-void add_lines(std::vector<line>& lines, MapCoords& borders) {
-    std::vector<sf::Vector2f>& points{ borders.points };
-    for (int i = 0; i < points.size() - 1; i++) {
-        line l{ points[i], points[i + 1] };
+void add_lines(std::vector<line>& lines,
+    std::vector<sf::Vector2f>& borders) {
+    for (int i = 0; i < borders.size() - 1; i++) {
+        line l{ borders[i], borders[i + 1] };
         lines.push_back(l);
     }
 }

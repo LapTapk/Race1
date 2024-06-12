@@ -3,21 +3,27 @@
 #include "game.h"
 #include <cmath>
 
-Renderer::Renderer(GameObject* go, std::string path_to_img) : Component(go) {
+Renderer::Renderer(GameObject* go,
+    std::string path_to_img, Camera* camera_c) :
+    Component{ go }, camera{ camera_c } {
     texture.loadFromFile(path_to_img);
     sprite.setTexture(texture);
     sf::Vector2f tzise{ texture.getSize() };
     sprite.setOrigin(tzise.x / 2, tzise.y / 2);
 }
 
-void Renderer::update() {
-    Game* game{ Game::instance };
+float Renderer::rotation() {
     Transform* transform{ go->transform };
-    Camera* camera{ game->camera };
 
     int camera_rot{ camera->go->transform->global_rot() };
     int rot{ transform->global_rot() - camera_rot };
-    sprite.setRotation(rot);
+    return rot;
+}
+
+sf::Vector2f Renderer::position() {
+    Game* game{ Game::instance };
+    Transform* transform{ go->transform };
+    int camera_rot{ camera->go->transform->global_rot() };
 
     sf::Vector2f pos{ transform->global_pos() };
     pos.y *= -1.0f;
@@ -35,12 +41,22 @@ void Renderer::update() {
         game->conf.window_size.first / 2, game->conf.window_size.second / 2);
 
     rot_pos += window_offset;
-    sprite.setPosition(rot_pos);
+    return rot_pos;
+}
 
+sf::Vector2f Renderer::scale() {
+    Transform* transform{ go->transform };
 
     sf::Vector2f scale{ transform->global_scale() };
     scale /= camera->zoomout;
-    sprite.setScale(scale);
+    return scale;
+}
 
+void Renderer::update() {
+    sprite.setRotation(rotation());
+    sprite.setPosition(position());
+    sprite.setScale(scale());
+
+    Game* game{ Game::instance };
     game->window.draw(sprite);
 }

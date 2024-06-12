@@ -14,7 +14,9 @@ MapCoords::MapCoords(std::string path_to_json_c) :
     for (Json::Value& v : json["points"]) {
         points.push_back({ v[0].asFloat(), v[1].asFloat() });
     }
-    points.push_back(points[0]);
+    if (!points.empty()) {
+        points.push_back(points[0]);
+    }
 }
 
 Json::Value MapCoords::to_json() {
@@ -37,7 +39,9 @@ void MapCoords::save() {
 }
 
 void MapCoords::push_back(sf::Vector2f v) {
-    points.pop_back();
+    if (!points.empty()) {
+        points.pop_back();
+    }
     points.push_back(v);
     points.push_back(points[0]);
 }
@@ -46,8 +50,10 @@ MapCoords::~MapCoords() {
     save();
 }
 
-MapDrawer::MapDrawer(GameObject* go, std::string path_to_json, bool write_c) :
-    Component{ go }, coords{ path_to_json }, write{ write_c } {
+MapDrawer::MapDrawer(GameObject* go, std::string path_to_json,
+    bool write_c, sf::PrimitiveType draw_mode_c) :
+    Component{ go }, coords{ path_to_json }, write{ write_c },
+    draw_mode{ draw_mode_c } {
 }
 
 void MapDrawer::update() {
@@ -56,5 +62,5 @@ void MapDrawer::update() {
         coords.save();
     }
 
-    draw_lines(coords.points);
+    draw_lines(coords.points, draw_mode);
 }

@@ -1,0 +1,72 @@
+\hypertarget{classCarMovement}{}\doxysection{Car\+Movement Class Reference}
+\label{classCarMovement}\index{CarMovement@{CarMovement}}
+
+
+Inheritance diagram for Car\+Movement\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=166pt]{classCarMovement__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Car\+Movement\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCarMovement__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classCarMovement_a5817b74fbc00ae560b12463f4f89e491}\label{classCarMovement_a5817b74fbc00ae560b12463f4f89e491}} 
+{\bfseries Car\+Movement} (\mbox{\hyperlink{classGameObject}{Game\+Object}} $\ast$\mbox{\hyperlink{classComponent_a3af8d9227f74082452f5052f55ea18a5}{go}}, \mbox{\hyperlink{classForce}{Force}} $\ast$force, \mbox{\hyperlink{structCarConf}{Car\+Conf}} conf, \mbox{\hyperlink{classRoadCheck}{Road\+Check}} $\ast$checker)
+\item 
+\mbox{\Hypertarget{classCarMovement_a82dbd355c333e9bd2981e085fae1110d}\label{classCarMovement_a82dbd355c333e9bd2981e085fae1110d}} 
+void {\bfseries set\+\_\+dir} (sf\+::\+Vector2f dir)
+\item 
+\mbox{\Hypertarget{classCarMovement_a1933d692feb9d018d7a67eb9db285723}\label{classCarMovement_a1933d692feb9d018d7a67eb9db285723}} 
+sf\+::\+Vector2f {\bfseries get\+\_\+dir} ()
+\item 
+void \mbox{\hyperlink{classCarMovement_a8fadabbc8d172b04d70ca40a4189e5b6}{update}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classCarMovement_a0e2c118df80a5216429e60f1b60d3299}\label{classCarMovement_a0e2c118df80a5216429e60f1b60d3299}} 
+\mbox{\hyperlink{structCarConf}{Car\+Conf}} {\bfseries conf}
+\item 
+\mbox{\Hypertarget{classCarMovement_aae19159524f50430a11fee1a144000c4}\label{classCarMovement_aae19159524f50430a11fee1a144000c4}} 
+bool {\bfseries decelerate} \{ false \}
+\item 
+\mbox{\Hypertarget{classCarMovement_a97295c5cbc54330e11fb131844ee379d}\label{classCarMovement_a97295c5cbc54330e11fb131844ee379d}} 
+bool {\bfseries move} \{ false \}
+\item 
+\mbox{\Hypertarget{classCarMovement_a0a7def0ec1cf40fd620f25e8ec3643fb}\label{classCarMovement_a0a7def0ec1cf40fd620f25e8ec3643fb}} 
+\mbox{\hyperlink{classForce}{Force}} $\ast$ {\bfseries force}
+\item 
+\mbox{\Hypertarget{classCarMovement_a250f6ab094af383442ea965f9edd8609}\label{classCarMovement_a250f6ab094af383442ea965f9edd8609}} 
+\mbox{\hyperlink{classRoadCheck}{Road\+Check}} $\ast$ {\bfseries checker}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classCarMovement_a8fadabbc8d172b04d70ca40a4189e5b6}\label{classCarMovement_a8fadabbc8d172b04d70ca40a4189e5b6}} 
+\index{CarMovement@{CarMovement}!update@{update}}
+\index{update@{update}!CarMovement@{CarMovement}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Car\+Movement\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classComponent}{Component}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+engine/include/components/car/car\+\_\+movement.\+h\item 
+engine/src/components/car/car\+\_\+movement.\+cpp\end{DoxyCompactItemize}

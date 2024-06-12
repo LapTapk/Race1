@@ -17,10 +17,11 @@ bool line::are_intersecting(line& other) {
         ccw(a, b, other.a) != ccw(a, b, other.b);
 }
 
-void draw_lines(std::vector<sf::Vector2f>& coords) {
+void draw_lines(std::vector<sf::Vector2f>& coords,
+    sf::PrimitiveType draw_mode) {
     Game* game{ Game::instance };
     int count = coords.size();
-    sf::VertexArray lines{ sf::LinesStrip, count };
+    sf::VertexArray lines{ draw_mode, count };
     for (int i = 0; i < count; i++) {
         const Game* game{ Game::instance };
         const GameObject* camera{ game->camera->go };
@@ -49,14 +50,19 @@ sf::Vector2f get_mpos() {
     sf::Vector2f mpos{ sf::Mouse::getPosition(game->window) };
     float zoomout{ game->camera->zoomout };
     mpos *= zoomout;
-    mpos += game->camera->go->transform->position;
-
     std::pair<int, int> wsize{ game->conf.window_size };
     sf::Vector2f window_offset{
         wsize.first / 2 * zoomout, wsize.second / 2 * zoomout
     };
     mpos -= window_offset;
-    return sf::Vector2f{ mpos.x, mpos.y };
+    float angle{  game->camera->go->transform->global_rot()
+        / 180 * M_PI };
+    mpos = { mpos.x * cos(angle) - mpos.y * sin(angle),
+        mpos.y * cos(angle) + mpos.x * sin(angle) };
+    mpos += game->camera->go->transform->global_pos();
+    mpos.y *= -1;
+
+    return mpos;
 }
 
 bool called_left_click() {

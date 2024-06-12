@@ -1,10 +1,10 @@
-#include "doctest.h"
+#include <doctest.h>
 #include "components/map_drawer.h"
 #include <string>
 #include <algorithm>
 
 TEST_CASE("Adding points") {
-    MapCoords coords{ "" };
+    MapCoords coords{ "../../configs/test_map.json" };
     coords.points.push_back({ 1, 2 });
     coords.points.push_back({ 4, 3 });
     coords.points.push_back({ 5, 6 });
@@ -19,5 +19,5 @@ TEST_CASE("Adding points") {
     auto result{ std::remove_if(actual.begin(), actual.end(), p) };
     actual.erase(result, actual.end());
 
-    CHECK(right == actual);
+    CHECK_EQ(right, actual);
 }
