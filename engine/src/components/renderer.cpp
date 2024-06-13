@@ -1,7 +1,7 @@
-#include "components/renderer.h"
+#include "components/renderer.hpp"
 #include <iostream>
-#include "components/transform.h"
-#include "game.h"
+#include "components/transform.hpp"
+#include "game.hpp"
 #include <cmath>
 
 Renderer::Renderer(GameObject* go,

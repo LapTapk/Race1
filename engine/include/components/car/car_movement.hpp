@@ -1,10 +1,10 @@
-#ifndef CAR_MOVEMENT_H
-#define CAR_MOVEMENT_H
+#ifndef CAR_MOVEMENT_HPP
+#define CAR_MOVEMENT_HPP
 
-#include "game_object.h"
-#include "components/force.h"
-#include "components/car/car_conf.h"
-#include "components/road_check.h"
+#include "game_object.hpp"
+#include "components/force.hpp"
+#include "components/car/car_conf.hpp"
+#include "components/road_check.hpp"
 #include <SFML/Graphics.hpp>
 
 class CarMovement : public Force {

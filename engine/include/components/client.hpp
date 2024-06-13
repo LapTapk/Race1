@@ -1,5 +1,5 @@
-#ifndef CLIENT_H
-#define CLIENT_H
+#ifndef CLIENT_HPP
+#define CLIENT_HPP
 
 #include <iostream>
 #include <boost/asio.hpp>
@@ -7,9 +7,9 @@
 #include <boost/algorithm/string.hpp>
 #include <SFML/Graphics.hpp>
 #include <thread>
-#include "game_object.h"
-#include "components/transform.h"
-#include "server_io.h"
+#include "game_object.hpp"
+#include "components/transform.hpp"
+#include "server_io.hpp"
 
 using boost::asio::ip::tcp;
 

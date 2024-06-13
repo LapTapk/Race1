@@ -1,4 +1,4 @@
-#include "components/force.h"
+#include "components/force.hpp"
 #include <numeric>
 #include <cmath>
 

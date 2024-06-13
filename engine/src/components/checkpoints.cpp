@@ -1,5 +1,5 @@
-#include "components/checkpoints.h"
-#include "utils.h"
+#include "components/checkpoints.hpp"
+#include "utils.hpp"
 #include <numeric>
 
 Checkpoint::Checkpoint(sf::Vector2f a, sf::Vector2f b) :

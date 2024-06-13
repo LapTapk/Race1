@@ -1,6 +1,6 @@
-#include "components/movement.h"
-#include "game.h"
-#include "components/transform.h"
+#include "components/movement.hpp"
+#include "game.hpp"
+#include "components/transform.hpp"
 #include <iostream>
 #include <cmath>
 

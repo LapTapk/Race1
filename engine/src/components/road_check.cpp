@@ -1,10 +1,10 @@
-#include "components/road_check.h"
+#include "components/road_check.hpp"
 #include <vector>
 #include <SFML/Graphics.hpp>
-#include "components/transform.h"
-#include "components/car/car_movement.h"
+#include "components/transform.hpp"
+#include "components/car/car_movement.hpp"
 #include <cmath>
-#include "utils.h"
+#include "utils.hpp"
 
 RoadCheck::RoadCheck(GameObject* go,
     std::vector<sf::Vector2f>& outborders_c,

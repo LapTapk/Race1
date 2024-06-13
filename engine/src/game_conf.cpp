@@ -1,4 +1,4 @@
-#include "game_conf.h"
+#include "game_conf.hpp"
 #include <jsoncpp/json/json.h>
 #include <fstream>
 

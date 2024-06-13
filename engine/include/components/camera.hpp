@@ -1,7 +1,7 @@
-#ifndef CAMERA_H
-#define CAMERA_H
+#ifndef CAMERA_HPP
+#define CAMERA_HPP
 
-#include "game_object.h"
+#include "game_object.hpp"
 
 /**
  * Компонент камеры

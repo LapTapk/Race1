@@ -1,18 +1,17 @@
-/*#include <doctest.h>
-#include "game.h"
-#include "components/renderer.h"
-#include "components/transform.h"
-#include "components/camera.h"
+#include <doctest.h>
+#include "game.hpp"
+#include "components/renderer.hpp"
+#include "components/transform.hpp"
+#include "components/camera.hpp"
 
 TEST_CASE("Position") {
-    GameMock game;
-    GameObject* scene{ game.scene.get() };
-    Camera* cam{ game.camera };
+    GameObject* scene{ nullptr };
+    Camera* cam{ new Camera{scene} };
     GameObject* go{ new GameObject{scene} };
-    Renderer* rend{ new Renderer{go, "../assets/penguin.png", cam} };
-    go->transform->position = {-5, 7};
+    Renderer* rend{ new Renderer{go, "../assets/penguin.png"} };
+    go->transform->position = { -5, 7 };
 
-    sf::Vector2f actual{rend->position()};
+    sf::Vector2f actual{ rend->position() };
     sf::Vector2f right;
     CHECK_EQ(right, actual);
-}*/
+}

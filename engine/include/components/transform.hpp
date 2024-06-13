@@ -1,9 +1,9 @@
-#ifndef TRANSFORM_H
-#define TRANSFORM_H
+#ifndef TRANSFORM_HPP
+#define TRANSFORM_HPP
 
 #include <SFML/Graphics.hpp>
 
-#include "game_object.h"
+#include "game_object.hpp"
 
 /**
  * Компонент, отвечающий за хранение и

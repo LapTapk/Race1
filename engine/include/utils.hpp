@@ -1,8 +1,8 @@
 /**
  * Файл утилит, исползуемых в разных частях проекта
 */
-#ifndef UTILS_H
-#define UTILS_H
+#ifndef UTILS_HPP
+#define UTILS_HPP
 
 #include <SFML/Graphics.hpp>
 

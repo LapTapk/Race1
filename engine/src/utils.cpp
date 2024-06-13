@@ -1,7 +1,7 @@
-#include "utils.h"
-#include "game.h"
-#include "game_object.h"
-#include "components/transform.h"
+#include "utils.hpp"
+#include "game.hpp"
+#include "game_object.hpp"
+#include "components/transform.hpp"
 #include <cmath>
 
 line::line(sf::Vector2f a_c, sf::Vector2f b_c) :

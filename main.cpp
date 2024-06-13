@@ -1,10 +1,10 @@
-#include "game.h"
-#include "game_object.h"
-#include "components/client.h"
-#include "default_scene.h"
-#include "components/camera.h"
+#include "game.hpp"
+#include "game_object.hpp"
+#include "components/client.hpp"
+#include "default_scene.hpp"
+#include "components/camera.hpp"
 #include <iostream>
-#include <server_io.h>
+#include <server_io.hpp>
 #include <string>
 #include <sstream>
 
@@ -28,7 +28,7 @@ int main() {
     ServerIO sio{ server_ip, port };
     
     char _;
-    std::cout << "Type any letter when ready ";
+    std::cout << "Enter any letter when ready ";
     std::cin >> _;
 
     sio.send_message("ready");

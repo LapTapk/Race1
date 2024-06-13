@@ -1,5 +1,5 @@
 #include <doctest.h>
-#include "game_object.h"
+#include "game_object.hpp"
 
 namespace go_test {
     class TestCmp : public Component {

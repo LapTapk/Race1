@@ -1,11 +1,11 @@
-#ifndef CHECKPOINTS_H
-#define CHECKPOINTS_H
+#ifndef CHECKPOINTS_HPP
+#define CHECKPOINTS_HPP
 
-#include "game_object.h"
-#include "components/map_drawer.h"
-#include "components/transform.h"
+#include "game_object.hpp"
+#include "components/map_drawer.hpp"
+#include "components/transform.hpp"
 #include <SFML/Graphics.hpp>
-#include "utils.h"
+#include "utils.hpp"
 
 /**
  * Структура, отвечающая за хранение информации

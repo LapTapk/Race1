@@ -1,5 +1,5 @@
-#ifndef CAR_CONF_H
-#define CAR_CONF_H
+#ifndef CAR_CONF_HPP
+#define CAR_CONF_HPP
 
 struct CarConf {
     float max_speed, acceleration,

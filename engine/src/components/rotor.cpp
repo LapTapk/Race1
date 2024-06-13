@@ -1,6 +1,6 @@
-#include "components/rotor.h"
-#include "game.h"
-#include "components/transform.h"
+#include "components/rotor.hpp"
+#include "game.hpp"
+#include "components/transform.hpp"
 #include <SFML/Graphics.hpp>
 
 Rotor::Rotor(GameObject* go) : Component(go) {}

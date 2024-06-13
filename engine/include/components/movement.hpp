@@ -1,8 +1,8 @@
-#ifndef MOVER_H
-#define MOVER_H
+#ifndef MOVER_HPP
+#define MOVER_HPP
 
 #include <SFML/Graphics.hpp>
-#include "game_object.h"
+#include "game_object.hpp"
 
 /**
  * Компонент, отвечающий за передвижение 

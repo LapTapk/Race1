@@ -1,6 +1,6 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <doctest.h>
-#include "game.h"
+#include "game.hpp"
 
 struct GameMock : Game {
     GameMock() : Game{

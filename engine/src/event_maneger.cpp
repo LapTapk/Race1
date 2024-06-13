@@ -1,5 +1,5 @@
-#include "event_manager.h"
-#include "game.h"
+#include "event_manager.hpp"
+#include "game.hpp"
 #include <SFML/Graphics.hpp>
 
 void EventManager::update() {

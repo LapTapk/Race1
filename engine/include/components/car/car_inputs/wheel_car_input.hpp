@@ -1,9 +1,9 @@
-#ifndef WHEEL_CAR_INPUT_H
-#define WHEEL_CAR_INPUT_H
+#ifndef WHEEL_CAR_INPUT_HPP
+#define WHEEL_CAR_INPUT_HPP
 
-#include "game_object.h"
-#include "components/rotor.h"
-#include "components/car/car_movement.h"
+#include "game_object.hpp"
+#include "components/rotor.hpp"
+#include "components/car/car_movement.hpp"
 
 class WheelCarInput : public Component {
 private:

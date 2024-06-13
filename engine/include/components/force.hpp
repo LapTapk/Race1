@@ -1,8 +1,8 @@
-#ifndef FORCE_H
-#define FORCE_H
+#ifndef FORCE_HPP
+#define FORCE_HPP
 
-#include "game_object.h"
-#include "movement.h"
+#include "game_object.hpp"
+#include "movement.hpp"
 #include <SFML/Graphics.hpp>
 #include <vector>
 

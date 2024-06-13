@@ -1,13 +1,13 @@
-#include "components/client.h"
+#include "components/client.hpp"
 #include <iostream>
-#include <server_io.h>
+#include <server_io.hpp>
 #include <boost/asio.hpp>
 #include <vector>
 #include <boost/algorithm/string.hpp>
 #include <SFML/Graphics.hpp>
 #include <thread>
-#include "game_object.h"
-#include "components/transform.h"
+#include "game_object.hpp"
+#include "components/transform.hpp"
 
 using boost::asio::ip::tcp;
 

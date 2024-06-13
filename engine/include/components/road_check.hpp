@@ -1,8 +1,8 @@
-#ifndef ROAD_CHECK_H
-#define ROAD_CHECK_H
+#ifndef ROAD_CHECK_HPP
+#define ROAD_CHECK_HPP
 
-#include "game_object.h"
-#include "components/map_drawer.h"
+#include "game_object.hpp"
+#include "components/map_drawer.hpp"
 
 class CarMovement;
 

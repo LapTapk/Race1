@@ -1,5 +1,5 @@
 #include <doctest.h>
-#include "components/map_drawer.h"
+#include "components/map_drawer.hpp"
 #include <string>
 #include <algorithm>
 

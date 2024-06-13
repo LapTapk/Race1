@@ -1,9 +1,9 @@
-#ifndef MAP_DRAWER_H
-#define MAP_DRAWER_H
+#ifndef MAP_DRAWER_HPP
+#define MAP_DRAWER_HPP
 
 #include <string>
 #include <vector>
-#include "game_object.h"
+#include "game_object.hpp"
 #include <jsoncpp/json/json.h>
 #include <SFML/Graphics.hpp>
 

@@ -1,7 +1,7 @@
 #include <doctest.h>
-#include "game_object.h"
-#include "components/movement.h"
-#include "components/transform.h"
+#include "game_object.hpp"
+#include "components/movement.hpp"
+#include "components/transform.hpp"
 
 TEST_CASE("Applying movement") {
     GameObject* go{ new GameObject{nullptr} };

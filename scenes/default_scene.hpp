@@ -1,8 +1,8 @@
-#ifndef DEFAULT_SCENE_H
-#define DEFAULT_SCENE_H
+#ifndef DEFAULT_SCENE_HPP
+#define DEFAULT_SCENE_HPP
 
-#include "game_object.h"
-#include "components.h"
+#include "game_object.hpp"
+#include "components.hpp"
 #include <vector>
 #include <string>
 

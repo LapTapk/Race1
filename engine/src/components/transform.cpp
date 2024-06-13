@@ -1,6 +1,6 @@
-#include "game_object.h"
-#include "game.h"
-#include "components/transform.h"
+#include "game_object.hpp"
+#include "game.hpp"
+#include "components/transform.hpp"
 #include <cmath>
 
 Transform::Transform(GameObject* go) : Component(go) {}

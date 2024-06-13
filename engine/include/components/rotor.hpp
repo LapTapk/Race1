@@ -1,7 +1,7 @@
-#ifndef ROTOR_H
-#define ROTOR_H
+#ifndef ROTOR_HPP
+#define ROTOR_HPP
 
-#include "game_object.h"
+#include "game_object.hpp"
 
 /**
  * Компонент, отвечащий за

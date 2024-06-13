@@ -1,5 +1,5 @@
-#ifndef GAME_CONF_H
-#define GAME_CONF_H
+#ifndef GAME_CONF_HPP
+#define GAME_CONF_HPP
 
 #include <string>
 

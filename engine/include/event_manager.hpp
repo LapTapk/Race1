@@ -1,5 +1,5 @@
-#ifndef EVENT_MANAGER_H
-#define EVENT_MANAGER_H 
+#ifndef EVENT_MANAGER_HPP
+#define EVENT_MANAGER_HPP
 
 #include <SFML/Graphics.hpp>
 

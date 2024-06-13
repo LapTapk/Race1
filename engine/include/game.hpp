@@ -1,10 +1,10 @@
-#ifndef GAME_H
-#define GAME_H
+#ifndef GAME_HPP
+#define GAME_HPP
 
-#include "event_manager.h"
-#include "game_object.h"
-#include "game_conf.h"
-#include "components/camera.h"
+#include "event_manager.hpp"
+#include "game_object.hpp"
+#include "game_conf.hpp"
+#include "components/camera.hpp"
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <memory>

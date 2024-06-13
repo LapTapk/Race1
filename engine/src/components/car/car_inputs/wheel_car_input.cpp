@@ -1,6 +1,6 @@
-#include "components/car/car_inputs/wheel_car_input.h"
-#include "game.h"
-#include "event_manager.h"
+#include "components/car/car_inputs/wheel_car_input.hpp"
+#include "game.hpp"
+#include "event_manager.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <cmath>

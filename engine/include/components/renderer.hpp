@@ -1,10 +1,10 @@
-#ifndef RENDERER_H
-#define RENDERER_H
+#ifndef RENDERER_HPP
+#define RENDERER_HPP
 
-#include "game_object.h"
+#include "game_object.hpp"
 #include <string>
 #include <SFML/Graphics.hpp>
-#include "components/camera.h"
+#include "components/camera.hpp"
 
 /**
  * Компонент, отвечающий за отрисовку спрайта 

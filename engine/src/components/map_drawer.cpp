@@ -1,10 +1,10 @@
-#include "components/map_drawer.h"
-#include "components/transform.h"
+#include "components/map_drawer.hpp"
+#include "components/transform.hpp"
 #include <jsoncpp/json/json.h>
 #include <SFML/Graphics.hpp>
 #include <fstream>
-#include "utils.h"
-#include "game.h"
+#include "utils.hpp"
+#include "game.hpp"
 
 MapCoords::MapCoords(std::string path_to_json_c) :
     path_to_json(path_to_json_c) {
