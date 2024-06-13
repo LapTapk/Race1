@@ -10,9 +10,8 @@
  * Компонент, прилагающий силу к объекту по формуле.
  * Масса объекта не учитывается, только данное ускорение.
  */
-class Force : public Component {
+class Force : public Movement {
 public:
-    Movement* mover;///< Mover объекта
     std::vector<sf::Vector2f> accelerations;///< Список ускорений
     /**
      * Конструктор Force
@@ -20,7 +19,7 @@ public:
      * @param go Родительский объект
      * @param mover Mover объекта
      */
-    Force(GameObject* go, Movement* mover);
+    Force(GameObject* go);
     /**
      * Функция счета кадра
      */

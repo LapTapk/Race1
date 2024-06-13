@@ -4,6 +4,7 @@
 #include "default_scene.h"
 #include "components/camera.h"
 #include <iostream>
+#include <server_io.h>
 #include <string>
 #include <sstream>
 
@@ -24,25 +25,24 @@ int main() {
     std::cout << "Insert server port: " << std::flush;
     std::cin >> port;
 
+    ServerIO sio{ server_ip, port };
+    
+    char _;
+    std::cout << "Type any letter when ready ";
+    std::cin >> _;
+
+    sio.send_message("ready");
+    while (sio.reply == "") {}
+
+    int cnt, ind;
+    std::tie(cnt, ind) = parse_reply(sio.reply);
+    ind--;
+
     GameObject* scene;
     Camera* camera;
-    Client* client;
-    RoadCheck* check;
-    create_defualt_scene(scene, camera, client, server_ip, port, check);
-
-    char _;
-    std::cout << "Type 1 when ready";
-    std::cin >> _;
-    std::cout << "hui";
-
-    client->send_message("ready");
-    while (client->reply == "") {}
-    int cnt, ind;
-    std::tie(cnt, ind) = parse_reply(client->reply);
-    client->this_ind = ind;
-    client->players = create_cars(scene, cnt, client, camera, check);
-
+    create_defualt_scene(scene, camera, sio, cnt, ind);
     GameConf conf("../configs/conf.json");
+    
     Game game(conf, scene, camera, server_ip, port);
     game.run();
 }

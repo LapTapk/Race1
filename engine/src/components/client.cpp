@@ -1,5 +1,6 @@
 #include "components/client.h"
 #include <iostream>
+#include <server_io.h>
 #include <boost/asio.hpp>
 #include <vector>
 #include <boost/algorithm/string.hpp>
@@ -28,64 +29,30 @@ void Client::parse_coords(
     std::string mes) {
     std::string str;
     std::stringstream ss(mes);
-    getline(ss, str, ' ');
-    int ind{ stoi(str) };
-    getline(ss, str, ' ');
-    float x{ stof(str) };
-    getline(ss, str, ' ');
-    float y{ stof(str) };
-
-    coords[ind] = { x, y };
-}
-
-void Client::read_from_server(tcp::socket& socket) {
     try {
-        char data[1024];
-        for (;;) {
-            boost::system::error_code error;
-            std::size_t length = socket.read_some(boost::asio::buffer(data), error);
-            if (error == boost::asio::error::eof) {
-                break; // Соединение закрыто сервером
-            }
-            else if (error) {
-                throw boost::system::system_error(error); // Другие ошибки
-            }
+        getline(ss, str, ' ');
+        int ind{ stoi(str) };
+        ind--;
+        getline(ss, str, ' ');
+        float x{ stof(str) };
+        getline(ss, str, ' ');
+        float y{ stof(str) };
 
-            reply = std::string{ data };
-        }
+        coords[ind] = { x, y };
     }
     catch (std::exception& e) {
-        std::cerr << "Exception in read thread: " << e.what() << "\n";
+
     }
 }
 
-Client::Client(GameObject* go, std::string server_ip_c,
-    std::string port_c) :
-    server_ip{ server_ip_c }, port{ port_c },
-    Component{ go },
-    socket{ io_context },
-    io_context{}
-{
-    tcp::resolver resolver(io_context);
-    auto endpoints = resolver.resolve(server_ip, port);
-    boost::asio::connect(socket, endpoints);
-    reader_thread = new std::thread(
-        &Client::read_from_server, this, std::ref(socket)
-    );
-}
 
-void Client::send_message(std::string mes) {
-    try {
-        std::string message{ mes };
-        boost::asio::write(socket, boost::asio::buffer(message));
-    }
-    catch (std::exception& e) {
-        std::cerr << "Exception: " << e.what() << "\n";
-    }
-}
+Client::Client(GameObject* go, ServerIO& sio_c,
+    int this_ind_c, std::vector<GameObject*> players_c) :
+    Component{ go }, sio{ sio_c },
+    this_ind{ this_ind_c }, players{ players_c },
+    coords{ players_c.size() } {}
 
 void Client::set_positions() {
-    parse_coords(reply);
     for (int i = 0; i < players.size(); i++) {
         if (i == this_ind) {
             continue;
@@ -96,11 +63,7 @@ void Client::set_positions() {
 }
 
 void Client::update() {
-    send_message(create_mes());
+    sio.send_message(create_mes());
+    parse_coords(sio.reply);
     set_positions();
-}
-
-Client::~Client() {
-    socket.close();
-    reader_thread->join();
 }

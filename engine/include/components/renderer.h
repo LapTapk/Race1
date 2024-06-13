@@ -20,7 +20,7 @@ public:
      * @param go Родительский объект
      * @param path_to_img Путь до изображения спрайта
      */
-    Renderer(GameObject* go, std::string path_to_img, Camera* camera);
+    Renderer(GameObject* go, std::string path_to_img);
     /**
      * Функция обработки кадра
      */

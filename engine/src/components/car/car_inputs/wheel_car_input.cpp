@@ -2,6 +2,7 @@
 #include "game.h"
 #include "event_manager.h"
 #include <SFML/Graphics.hpp>
+#include <iostream>
 #include <cmath>
 
 WheelCarInput::WheelCarInput(GameObject* go, Rotor* rotor_c,

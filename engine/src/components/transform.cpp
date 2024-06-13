@@ -6,7 +6,7 @@
 Transform::Transform(GameObject* go) : Component(go) {}
 
 sf::Vector2f Transform::forward() {
-    float angle{ go->transform->global_rot() / 180.0f * M_PI };
+    float angle{ global_rot() / 180.0f * M_PI };
     return sf::Vector2f{ sin(angle), cos(angle) };
 }
 
@@ -16,12 +16,12 @@ sf::Vector2f Transform::global_pos() {
         return position;
     }
 
-    float angle{parent->transform->rotation / 180.0f * M_PI};
+    float angle{ -parent->transform->global_rot() / 180.0f * M_PI };
     sf::Vector2f rot_pos{
         position.x * cos(angle) - position.y * sin(angle),
         position.y * cos(angle) + position.x * sin(angle)
     };
-    sf::Vector2f parent_gpos = parent->transform->global_pos();
+    sf::Vector2f parent_gpos{ parent->transform->global_pos() };
     return rot_pos + parent_gpos;
 }
 

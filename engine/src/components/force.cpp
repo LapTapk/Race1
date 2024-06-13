@@ -2,8 +2,8 @@
 #include <numeric>
 #include <cmath>
 
-Force::Force(GameObject* go, Movement* mover_c) :
-    Component(go), mover(mover_c) {}
+Force::Force(GameObject* go) :
+    Movement{go} {}
 
 void Force::update() {
     sf::Vector2f acc_sum{
@@ -12,5 +12,6 @@ void Force::update() {
         sf::Vector2f{0, 0})
     };
 
-    mover->vector += acc_sum;
+    vector += acc_sum;
+    Movement::update();
 }
